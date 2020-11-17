@@ -1,0 +1,1 @@
+// Analyze Page to show analysis of user where the user sees the results of his / her activities

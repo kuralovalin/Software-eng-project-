@@ -1,0 +1,1 @@
+// When the user enters the site,he/she will see the short description of the site and Login-Signup pages.

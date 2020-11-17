@@ -1,0 +1,1 @@
+// Create a new user with an username and password.
