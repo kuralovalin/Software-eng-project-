@@ -33,7 +33,7 @@ function Log_in () {
   }
 
   return (
-    <div className="Loginf">
+    <div className="Log_in">
       {(user.email != "") ? (
         <div className="welcome">
           <h2>Welcome, <span>{user.name}</span></h2>
