@@ -31,4 +31,4 @@ function LoginForm({Login, error}) {
   )
 }
 
-export default LoginForm
+export default LoginForm;

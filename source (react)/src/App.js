@@ -1,49 +1,28 @@
 import React, { useState } from 'react'
-import LoginForm from './components/LoginForm'
+import Login from './components/Login'
+import Nav from './Nav';
+import SignUp from './components/SignUp';
+import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App () {
-  const adminUser = {
-    email: "admin@admin.com",
-    password: "admin123"
-  }
-
-  const [user, setUser] = useState({name: "", email: ""});
-  const [error, setError] = useState("");
-
-  const Login = details => {
-    console.log(details);
-    if (details.email == adminUser.email && details.password == details.password) {
-        console.log("Logged In");
-        setUser({
-          name: details.name,
-          email: details.email
-        });
-    }
-      else {
-        setError("User not Found");
-      }
-  }
-
-  const Logout = () => {
-    console.log("Logout");
-    setUser({
-      name: "",
-      email: ""
-    });
-  }
-
   return (
-    <div className="App">
-      {(user.email != "") ? (
-        <div className="welcome">
-          <h2>Welcome, <span>{user.name}</span></h2>
-          <button onClick = {Logout}>Logout</button>
-        </div>
-      ) : (
-        <LoginForm Login={Login} error={error} />
-      )}
-    </div>
+    <Router>
+      <div className="App">
+        <Nav />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={SignUp} />
+        </Switch> 
+      </div>
+    </Router>
   );
 }
 
+const Home = () => (
+  <div>
+    <h1>Home Page</h1>
+  </div>
+)
 export default App;
