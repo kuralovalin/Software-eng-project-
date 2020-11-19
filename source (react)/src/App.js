@@ -1,18 +1,49 @@
-import React, { Component } from "react";
-//import logo from './logo.svg';
-import './App.css';
-import Login from "./components/Login";
+import React, { useState } from 'react'
+import LoginForm from './components/LoginForm'
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <Login> </Login>
-      </div>
-    );
+function App () {
+  const adminUser = {
+    email: "admin@admin.com",
+    password: "admin123"
   }
 
-}
+  const [user, setUser] = useState({name: "", email: ""});
+  const [error, setError] = useState("");
 
+  const Login = details => {
+    console.log(details);
+    if (details.email == adminUser.email && details.password == details.password) {
+        console.log("Logged In");
+        setUser({
+          name: details.name,
+          email: details.email
+        });
+    }
+      else {
+        setError("User not Found");
+      }
+  }
+
+  const Logout = () => {
+    console.log("Logout");
+    setUser({
+      name: "",
+      email: ""
+    });
+  }
+
+  return (
+    <div className="App">
+      {(user.email != "") ? (
+        <div className="welcome">
+          <h2>Welcome, <span>{user.name}</span></h2>
+          <button onClick = {Logout}>Logout</button>
+        </div>
+      ) : (
+        <LoginForm Login={Login} error={error} />
+      )}
+    </div>
+  );
+}
 
 export default App;
