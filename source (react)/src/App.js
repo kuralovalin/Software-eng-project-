@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Login from './components/Login'
 import Nav from './Nav';
 import SignUp from './components/SignUp';
+import Homepage from './components/HomePage';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
@@ -11,7 +12,7 @@ function App () {
       <div className="App">
         <Nav />
         <Switch>
-          <Route path="/" exact component={Home} />
+          <Route path="/" exact component={Homepage} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={SignUp} />
         </Switch> 
@@ -20,9 +21,4 @@ function App () {
   );
 }
 
-const Home = () => (
-  <div>
-    <h1>Home Page</h1>
-  </div>
-)
 export default App;

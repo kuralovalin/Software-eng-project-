@@ -7,8 +7,8 @@ nav {
   justify-content: space-around;
   align-items: center;
   min-height: 10vh;
-  background: darkkhaki;
-  color: white;
+  background: rgb(224, 224, 215);
+  color: rgb(6, 103, 158);
 }
 
 .nav-links {

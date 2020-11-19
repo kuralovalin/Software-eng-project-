@@ -1,1 +1,9 @@
-// When the user enters the site,he/she will see the short description of the site and Login-Signup pages.
+import React from 'react'
+
+export default function HomePage() {
+    return (
+        <div>
+            <h1>HomePage</h1>
+        </div>
+    )
+}
