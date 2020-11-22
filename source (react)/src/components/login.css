@@ -14,11 +14,12 @@ button {
 }
 
 .Log_in {
-  height: 650px;
+  height: 720px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-image: url("./login_image.jpg");
+  /* background-color: rgb(131, 96, 131);*/
   background-position: center;
   background-size: 1500px 800px;
   background-repeat: no-repeat;
