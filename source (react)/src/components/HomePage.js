@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-/*
-import Header from './header';
-import Footer from './footer';*/
 
 class HomePage extends Component {
     render() {
@@ -24,21 +21,3 @@ class HomePage extends Component {
 }
 
 export default HomePage;
-
-
-
-
-
-
-
-/*
-import React from 'react'
-
-export default function HomePage() {
-    return (
-        <div>
-            <h1>HomePage</h1>
-        </div>
-    )
-}
-*/
