@@ -21,23 +21,4 @@ function App() {
   )
 }
 
-
-/*
-function App () {
-  return (
-    <Router>
-      <div className="App">
-        <Nav />
-        <Switch>
-          <Route path="/" exact component={Homepage} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={SignUp} />
-        </Switch> 
-      </div>
-    </Router>
-  );
-}
-*/
-
-
 export default App;
