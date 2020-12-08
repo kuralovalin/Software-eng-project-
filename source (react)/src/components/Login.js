@@ -36,6 +36,11 @@ class Login extends Component {
           password: ""
         }
       };
+      this.buttonClicked = this.buttonClicked.bind(this);
+    }
+
+    buttonClicked(event) {
+      this.setState({isLoggedIn: true});
     }
 
     handleSubmit = e => {
@@ -80,7 +85,7 @@ class Login extends Component {
 
         if (isLoggedIn === true) {
           console.log(isLoggedIn);
-          return <Redirect to='/dashboard' component={UserPanel}/>
+          return <Redirect to="/dashboard" component={UserPanel}/>
         }
         return (
           <div className="wrapper">
@@ -116,7 +121,7 @@ class Login extends Component {
                   )}
                 </div>
                 <div className="createAccount">
-                  <button type="submit">
+                  <button type="submit" onClick={this.buttonClicked}>
                     Log In
                   </button>
 

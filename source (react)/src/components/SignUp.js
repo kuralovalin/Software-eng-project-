@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import UserPanel from './UserPanel';
 import "./login-signup.css";
 
 const emailRegex = RegExp(
@@ -30,6 +32,7 @@ class SignUp extends Component {
       lastName: null,
       email: null,
       password: null,
+      isLoggedIn: false,
       formErrors: {
         firstName: "",
         lastName: "",
@@ -37,12 +40,18 @@ class SignUp extends Component {
         password: ""
       }
     };
+    this.buttonClicked = this.buttonClicked.bind(this);
+  }
+
+  buttonClicked(event) {
+    this.setState({isLoggedIn: true});
   }
 
   handleSubmit = e => {
     e.preventDefault();
 
     if (formValid(this.state)) {
+      this.state.isLoggedIn=true;
       console.log(`
         --SUBMITTING--
         First Name: ${this.state.firstName}
@@ -87,6 +96,12 @@ class SignUp extends Component {
 
   render() {
     const { formErrors } = this.state;
+    const isLoggedIn = this.state.isLoggedIn;
+
+    if (isLoggedIn === true) {
+      console.log(isLoggedIn);
+      return <Redirect to="/dashboard" component={UserPanel}/>
+    }
 
     return (
       <div className="wrapper">
@@ -150,7 +165,9 @@ class SignUp extends Component {
               )}
             </div>
             <div className="createAccount">
-              <button type="submit">Create Account</button>
+              <button type="submit" onClick={this.buttonClicked}>
+                Sign Up
+              </button>
             </div>
           </form>
         </div>
