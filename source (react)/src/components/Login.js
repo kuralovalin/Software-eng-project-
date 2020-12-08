@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import UserPanel from './UserPanel';
 import "./login-signup.css";
 
 const emailRegex = RegExp(
@@ -24,10 +26,11 @@ const emailRegex = RegExp(
 class Login extends Component {
     constructor(props) {
       super(props);
-  
+
       this.state = {
         email: null,
         password: null,
+        isLoggedIn: false,
         formErrors: {
           email: "",
           password: ""
@@ -39,11 +42,12 @@ class Login extends Component {
         e.preventDefault();
     
         if (formValid(this.state)) {
+          this.state.isLoggedIn=true;
           console.log(`
             --SUBMITTING--
             Email: ${this.state.email}
             Password: ${this.state.password}
-          `);
+          `);  
         } else {
           console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
         }
@@ -72,7 +76,12 @@ class Login extends Component {
     
       render() {
         const { formErrors } = this.state;
-    
+        const isLoggedIn = this.state.isLoggedIn;
+
+        if (isLoggedIn === true) {
+          console.log(isLoggedIn);
+          return <Redirect to='/dashboard' component={UserPanel}/>
+        }
         return (
           <div className="wrapper">
             <div className="form-wrapper">
@@ -107,7 +116,10 @@ class Login extends Component {
                   )}
                 </div>
                 <div className="createAccount">
-                  <button type="submit">Log In</button>
+                  <button type="submit">
+                    Log In
+                  </button>
+
                 </div>
               </form>
             </div>
