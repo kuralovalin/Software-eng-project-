@@ -33,6 +33,7 @@ class SignUp extends Component {
       email: null,
       password: null,
       isLoggedIn: false,
+      isValid: false,
       formErrors: {
         firstName: "",
         lastName: "",
@@ -97,9 +98,8 @@ class SignUp extends Component {
   render() {
     const { formErrors } = this.state;
     const isLoggedIn = this.state.isLoggedIn;
-
-    if (isLoggedIn === true) {
-      console.log(isLoggedIn);
+        
+    if (isLoggedIn && formValid(this.state)) {
       return <Redirect to="/dashboard" component={UserPanel}/>
     }
 

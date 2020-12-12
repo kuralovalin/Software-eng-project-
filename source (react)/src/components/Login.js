@@ -47,7 +47,6 @@ class Login extends Component {
         e.preventDefault();
     
         if (formValid(this.state)) {
-          this.state.isLoggedIn=true;
           console.log(`
             --SUBMITTING--
             Email: ${this.state.email}
@@ -82,11 +81,11 @@ class Login extends Component {
       render() {
         const { formErrors } = this.state;
         const isLoggedIn = this.state.isLoggedIn;
-
-        if (isLoggedIn === true) {
-          console.log(isLoggedIn);
+        
+        if (isLoggedIn && formValid(this.state)) {
           return <Redirect to="/dashboard" component={UserPanel}/>
         }
+
         return (
           <div className="wrapper">
             <div className="form-wrapper">
