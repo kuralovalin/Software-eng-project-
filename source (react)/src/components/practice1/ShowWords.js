@@ -1,0 +1,1 @@
+//Dictionary den rastgele 10 kelime alıp ekranda gösterecek. burdan UserInput.js sayfasına gidecek.

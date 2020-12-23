@@ -1,0 +1,1 @@
+// Kullanıcıdan 10 tane kelime alıp Practice1Results.js sayfasına gidecek.

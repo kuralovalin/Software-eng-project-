@@ -1,0 +1,1 @@
+//Kullanıcının girdiği kelimeleri kontrol edip hangileri doğru hangileri yanlış onu gösterecek. Burdan da sonraki pratik sayfasına geçecek.(Practice2)

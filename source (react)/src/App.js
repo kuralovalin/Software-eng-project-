@@ -1,20 +1,20 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import Nav from './Nav';
+
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Homepage from './components/HomePage';
 import UserPanel from './components/UserPanel';
 import AnalyzePage from './components/analyzePage';
 import Practice from './components/Practice';
-import Example from './example'
+import Example from './example';
+import About from './components/About';
 import './App.css';
 
 function App() {
   return (
     <Router>
-        <div className="App">
-            <Nav />       
+        <div className="App">  
             <Switch>
                 <Route path="/" exact component={Homepage} />
                 <Route path="/login" component={Login} />
@@ -23,6 +23,7 @@ function App() {
                 <Route path="/analyze" component={AnalyzePage} />
                 <Route path="/practices" component={Practice} />
                 <Route path="/example" component={Example} />
+                <Route path="/about" component={About} />
             </Switch>
         </div>
     </Router>
