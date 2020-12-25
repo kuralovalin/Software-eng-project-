@@ -4,7 +4,7 @@ export class AnalyzePage extends Component {
     render() {
         return (
             <div>
-            
+            analyze page
             </div>
         )
     }

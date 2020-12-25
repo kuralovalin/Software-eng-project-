@@ -1,1 +1,0 @@
-// 1. tekniğin açıklamasının yapılacağı sayfa. Burdan ShowWords.js sayfasıına gidecek.
