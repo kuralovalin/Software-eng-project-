@@ -40,15 +40,25 @@ export default class ShowWords extends Component {
     render() {
         const { minutes, seconds } = this.state
         return (
-            <div>
-                { minutes === 0 && seconds === 0
-                    ? <h1>Time is up !!!!</h1>
-                    : <h1>Time Remaining: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}</h1>
-                }
+
+            <div class="card">
+                <div class="card-header">
+                    First Practice
+                </div>
+                <div class="card-body">
+                    { minutes === 0 && seconds === 0
+                        ? <h1>Time is up !!!!</h1>
+                        : <h1>Time Remaining: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}</h1>
+                    }
+                </div>
+
                 <div class="/">
                     <h2 >words : </h2>
                 </div>
             </div>
+
+
+
 
         )
     }
