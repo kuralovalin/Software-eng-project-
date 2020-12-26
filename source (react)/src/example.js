@@ -3,7 +3,7 @@ import {useState, useEffect } from 'react'
 function Example() {
     const [hello, setHello] = useState('hello from react')
         useEffect(() => {
-            fetch('/getArray')
+            fetch('/fromEngDictionary')
             .then(res => res.json())
             .then(data => setHello(data))
         }, [])
