@@ -1,5 +1,10 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import Grid from '@material-ui/core/Grid';
+import Link from '@material-ui/core/Link';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 import UserPanel from './UserPanel';
 import "./login-signup.css";
 
@@ -23,6 +28,18 @@ const formValid = ({ formErrors, ...rest }) => {
   return valid;
 };
 
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="/">
+        memovercity
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
 class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -169,8 +186,18 @@ class SignUp extends Component {
                 Sign Up
               </button>
             </div>
+            <Grid container justify="flex-end">
+              <Grid item>
+                <Link href="/login" variant="body2">
+                  Already have an account? Sign in
+                </Link>
+              </Grid>
+          </Grid>
           </form>
         </div>
+        <Box mt={8}>
+            <Copyright />
+        </Box>
       </div>
     );
   }

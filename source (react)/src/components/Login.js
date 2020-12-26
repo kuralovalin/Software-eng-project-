@@ -1,5 +1,10 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import Grid from '@material-ui/core/Grid';
+import Link from '@material-ui/core/Link';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 import UserPanel from './UserPanel';
 import "./login-signup.css";
 
@@ -22,6 +27,19 @@ const emailRegex = RegExp(
 
     return valid;
 };
+
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="/">
+        memovercity
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
 
 class Login extends Component {
     constructor(props) {
@@ -87,7 +105,8 @@ class Login extends Component {
         }
 
         return (
-          <div className="wrapper">
+          
+            <div className="wrapper">
             <div className="form-wrapper">
               <h1>Log In</h1>
               <form onSubmit={this.handleSubmit} noValidate>
@@ -123,10 +142,19 @@ class Login extends Component {
                   <button type="submit" onClick={this.buttonClicked}>
                     Log In
                   </button>
-
                 </div>
+                <Grid container justify="flex-end">
+                  <Grid item>
+                    <Link href="/signup" variant="body2">
+                      {"Don't have an account? Sign Up"}
+                    </Link>
+                  </Grid>
+                </Grid>
               </form>
             </div>
+            <Box mt={8}>
+              <Copyright />
+            </Box>
           </div>
         );
       }
