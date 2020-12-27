@@ -2,10 +2,21 @@
 
 import React, { Component } from 'react'
 /* document.body.style = 'background: purple;'; */
+import Example from '../../example';
+
+
+
+function Call() {
+    const words = Example();
+    return (
+        <div>
+            {words}
+        </div>
+    );
+}
 
 
 export default class ShowWords extends Component {
-
     state = {
         minutes: 2,
         seconds: 0,
@@ -29,7 +40,7 @@ export default class ShowWords extends Component {
                         seconds: 59
                     }))
                 }
-            } 
+            }
         }, 1000)
     }
 
@@ -39,8 +50,8 @@ export default class ShowWords extends Component {
 
     render() {
         const { minutes, seconds } = this.state
-        return (
 
+        return (
             <div class="card">
                 <div class="card-header">
                     First Practice
@@ -54,12 +65,14 @@ export default class ShowWords extends Component {
 
                 <div class="/">
                     <h2 >words : </h2>
+                    <Call />
                 </div>
+
+
             </div>
-
-
-
 
         )
     }
+
+
 }
