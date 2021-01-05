@@ -7,7 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import UserPanel from './UserPanel';
 import "./login-signup.css";
-
+import axios from "axios";
+const ENDPOINT = "http://localhost:5000/user/login";
 const emailRegex = RegExp(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
   );
@@ -55,10 +56,12 @@ class Login extends Component {
         }
       };
       this.buttonClicked = this.buttonClicked.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     buttonClicked(event) {
-      this.setState({isLoggedIn: true});
+      //Login Logic will be implemented here
+      this.handleSubmit(event);
     }
 
     handleSubmit = e => {
@@ -69,7 +72,16 @@ class Login extends Component {
             --SUBMITTING--
             Email: ${this.state.email}
             Password: ${this.state.password}
-          `);  
+          `); 
+          
+          axios.post(ENDPOINT,{email: this.state.email, password:this.state.password})
+          .then( (res) => {
+              if(res.status == 200) this.setState({isLoggedIn: true});
+              console.log(res.data);
+          })
+          .catch(e => console.log("Error is : ", e));
+
+          
         } else {
           console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
         }

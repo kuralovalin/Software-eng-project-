@@ -7,7 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import UserPanel from './UserPanel';
 import "./login-signup.css";
-
+import axios from 'axios';
+const ENDPOINT = "http://localhost:5000/user/register";
 const emailRegex = RegExp(
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
@@ -59,17 +60,28 @@ class SignUp extends Component {
       }
     };
     this.buttonClicked = this.buttonClicked.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   buttonClicked(event) {
-    this.setState({isLoggedIn: true});
+    this.handleSubmit(event);
   }
 
   handleSubmit = e => {
     e.preventDefault();
+    console.log("Hello");
+    axios.post(ENDPOINT,{name:this.state.firstName,email: this.state.email, password:this.state.password})
+    .then( (res) => {
+        if(res.status == 200) this.setState({isLoggedIn: true});
+        console.log("Res data is : ",res.data);
+    });
 
-    if (formValid(this.state)) {
-      this.state.isLoggedIn=true;
+
+
+
+
+    /*if (formValid(this.state)) {
+      //this.state.isLoggedIn=true;
       console.log(`
         --SUBMITTING--
         First Name: ${this.state.firstName}
@@ -77,9 +89,11 @@ class SignUp extends Component {
         Email: ${this.state.email}
         Password: ${this.state.password}
       `);
+
+
     } else {
       console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
-    }
+    }*/
   };
 
   handleChange = e => {
@@ -109,7 +123,7 @@ class SignUp extends Component {
         break;
     }
 
-    this.setState({ formErrors, [name]: value }, () => console.log(this.state));
+    this.setState({ formErrors, [name]: value }, () => null);
   };
 
   render() {
