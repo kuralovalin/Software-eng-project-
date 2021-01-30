@@ -81,16 +81,14 @@ export default function Album() {
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              Improve Your Memory
+              ABOUT US 
             </Typography>
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-            Cras malesuada nisl a viverra lacinia. Vestibulum id tortor metus. 
-            Nulla ac nibh non ipsum tempus eleifend. Nam at vulputate est, in dapibus velit. 
-            Nullam fermentum lacinia ex, nec finibus augue pulvinar venenatis. 
-            In hac habitasse platea dictumst. Suspendisse pretium tincidunt est id efficitur. 
-            Duis dui velit, tincidunt id sollicitudin pellentesque, mollis in dolor. Sed sed tristique lacus.
-            </Typography>          
+            Memovercity is really helps for you to train your brain.
+            You can sign up using your e-mail and password information. 
+            After that you can learn and practice common memorization techniques. 
+            And also the results of each practice will be recorded, so in this way you can follow your progress.
+            </Typography>
           </Container>
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
@@ -106,20 +104,11 @@ export default function Album() {
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      Heading
                     </Typography>
                     <Typography>
-                      This is a media card. You can use this section to describe the content.
+                      MEMOVERCITY
                     </Typography>
                   </CardContent>
-                  <CardActions>
-                    <Button size="small" color="primary">
-                      View
-                    </Button>
-                    <Button size="small" color="primary">
-                      Edit
-                    </Button>
-                  </CardActions>
                 </Card>
               </Grid>
             ))}
