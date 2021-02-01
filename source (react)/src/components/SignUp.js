@@ -1,14 +1,14 @@
-import React, { Component } from "react";
+import React, { useState,useContext } from "react";
 import { Redirect } from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import UserPanel from './UserPanel';
+import WelcomePage from './WelcomePage';
 import "./login-signup.css";
+import MainContext from '../contexts/MainContext';
 import axios from 'axios';
-const ENDPOINT = "http://localhost:5000/user/register";
+const ENDPOINT = "https://memovercity.herokuapp.com/user/register";
 const emailRegex = RegExp(
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
@@ -41,65 +41,52 @@ function Copyright() {
     </Typography>
   );
 }
-class SignUp extends Component {
-  constructor(props) {
-    super(props);
+function SignUp(props) {
+  const[state,setState] = useState({
+    firstName: null,
+    lastName: null,
+    email: null,
+    password: null,
+    isLoggedIn: false,
+    isValid: false,
+    formErrors: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: ""
+    }
+  });
 
-    this.state = {
-      firstName: null,
-      lastName: null,
-      email: null,
-      password: null,
-      isLoggedIn: false,
-      isValid: false,
-      formErrors: {
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: ""
-      }
-    };
-    this.buttonClicked = this.buttonClicked.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  const {setLogin,setName,setToken} = useContext(MainContext);
+    
 
-  buttonClicked(event) {
-    this.handleSubmit(event);
-  }
 
-  handleSubmit = e => {
+  
+
+  const handleSubmit = e => {
     e.preventDefault();
-    console.log("Hello");
-    axios.post(ENDPOINT,{name:this.state.firstName,email: this.state.email, password:this.state.password})
+    
+    axios.post(ENDPOINT,{name:state.firstName,email: state.email, password:state.password})
     .then( (res) => {
-        if(res.status == 200) this.setState({isLoggedIn: true});
-        console.log("Res data is : ",res.data);
+        if(res.status === 200) {
+          setToken(res.data.aTo);
+          setLogin(true);
+          setName(res.data.username);
+          setState({...state,isLoggedIn: true});
+        
+        }
+        
     });
-
-
-
-
-
-    /*if (formValid(this.state)) {
-      //this.state.isLoggedIn=true;
-      console.log(`
-        --SUBMITTING--
-        First Name: ${this.state.firstName}
-        Last Name: ${this.state.lastName}
-        Email: ${this.state.email}
-        Password: ${this.state.password}
-      `);
-
-
-    } else {
-      console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
-    }*/
   };
 
-  handleChange = e => {
+  const buttonClicked = (event) => {
+    handleSubmit(event);
+  }
+
+  const handleChange = e => {
     e.preventDefault();
     const { name, value } = e.target;
-    let formErrors = { ...this.state.formErrors };
+    let formErrors = { ...state.formErrors };
 
     switch (name) {
       case "firstName":
@@ -123,22 +110,21 @@ class SignUp extends Component {
         break;
     }
 
-    this.setState({ formErrors, [name]: value }, () => null);
+    setState({ ...state,formErrors, [name]: value }, () => null);
   };
 
-  render() {
-    const { formErrors } = this.state;
-    const isLoggedIn = this.state.isLoggedIn;
+    const { formErrors } = state;
+    const isLoggedIn = state.isLoggedIn;
         
-    if (isLoggedIn && formValid(this.state)) {
-      return <Redirect to="/dashboard" component={UserPanel}/>
+    if (isLoggedIn && formValid(state)) {
+      return <Redirect to="/user" component={WelcomePage}/>
     }
 
     return (
       <div className="wrapper">
         <div className="form-wrapper">
           <h1>Create Account</h1>
-          <form onSubmit={this.handleSubmit} noValidate>
+          <form onSubmit={handleSubmit} noValidate>
             <div className="firstName">
               <label htmlFor="firstName">First Name</label>
               <input
@@ -147,7 +133,7 @@ class SignUp extends Component {
                 type="text"
                 name="firstName"
                 noValidate
-                onChange={this.handleChange}
+                onChange={handleChange}
               />
               {formErrors.firstName.length > 0 && (
                 <span className="errorMessage">{formErrors.firstName}</span>
@@ -161,7 +147,7 @@ class SignUp extends Component {
                 type="text"
                 name="lastName"
                 noValidate
-                onChange={this.handleChange}
+                onChange={handleChange}
               />
               {formErrors.lastName.length > 0 && (
                 <span className="errorMessage">{formErrors.lastName}</span>
@@ -175,7 +161,7 @@ class SignUp extends Component {
                 type="email"
                 name="email"
                 noValidate
-                onChange={this.handleChange}
+                onChange={handleChange}
               />
               {formErrors.email.length > 0 && (
                 <span className="errorMessage">{formErrors.email}</span>
@@ -189,14 +175,14 @@ class SignUp extends Component {
                 type="password"
                 name="password"
                 noValidate
-                onChange={this.handleChange}
+                onChange={handleChange}
               />
               {formErrors.password.length > 0 && (
                 <span className="errorMessage">{formErrors.password}</span>
               )}
             </div>
             <div className="createAccount">
-              <button type="submit" onClick={this.buttonClicked}>
+              <button type="submit" onClick={buttonClicked}>
                 Sign Up
               </button>
             </div>
@@ -214,7 +200,7 @@ class SignUp extends Component {
         </Box>
       </div>
     );
-  }
+  
 }
 
 export default SignUp;

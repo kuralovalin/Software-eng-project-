@@ -29,9 +29,10 @@ router.post('/register', async(req,res) => {
 			email: req.body.email,
 			password: hashPass,
 			level : [
-				{type:"mb", completed: [], fail: 0, waiting:0},
-				{type:"st", completed: [], fail: 0, waiting:0}
-			]
+				{type:"mb", completed: -1},
+				{type:"st", completed: -1}
+			],
+			completedEx:[]
 
 		}
 		
@@ -40,7 +41,7 @@ router.post('/register', async(req,res) => {
 
 		const token = jwt.sign(_.pick(user,["name","email"]), process.env.ACCESS_SECRET_TOKEN);
 		
-		res.header('http-auth',token).json({aTo: token});
+		res.header('http-auth',token).json({username:user.name, aTo : token});
 		res.end();
 		
 	
@@ -66,7 +67,7 @@ router.post('/login' , async(req,res) => {
 	//if username and hash correct return access_token
 	const token = jwt.sign(_.pick(user,["name","email"]), process.env.ACCESS_SECRET_TOKEN);
 		
-	res.header('http-auth',token).json({aTo: token});
+	res.header('http-auth',token).json({username:user.name, aTo : token});
 	res.end();	
 	
 })
@@ -98,7 +99,22 @@ router.get('/profile', verifyToken, async(req,res) => {
 
 //Get Levels of User
 // Levels include
-	
+router.get("/completed", verifyToken, async (req,res) => {
+	if(!req.email) return res.status(403).send("Bad request!! Token error");
+
+	const ml = req.email;
+	const resp = await db.collection("users").where("email","==" ,ml).get();
+	//console.log("req.name = ", req.name);
+	if(!resp.docs) return res.status(404).send("Could not find user");
+	const userData = resp.docs[0].data();
+	res.send(userData.completedEx);
+})
+router.get("/logout", verifyToken, async (req,res) => {
+	if(!req.email) return res.status(403).send("Bad request!! Token error");
+
+	res.header('http-auth',"").send("Logged out");
+})
+
 module.exports = router;
 
 
